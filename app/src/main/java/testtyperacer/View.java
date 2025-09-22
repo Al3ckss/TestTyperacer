@@ -6,17 +6,18 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class View {
-
+    
+    
     JFrame frame = new JFrame();
-    JLabel label1 = new JLabel("Parola corrente");
+    JLabel label1 = new JLabel();
     JTextField textField = new JTextField();
 
     public void setLabel1(JLabel label1) {
         this.label1 = label1;
     }
 
-    public void setTextField(JTextField textField) {
-        this.textField = textField;
+    public void setTextField(String text) {
+        this.textField.setText(text);
     }
 
     public JLabel getLabel1() {
