@@ -4,13 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class Model {
-    private final long time = 20_000;
-    private int remainingTime = 20_000;
-    private final long delay = 50;
-    private String currentWord = getRandom();
+
 
     private final List<String> words = Arrays.asList(
     "auto", "casa", "sole", "luna", "mare", "vento", "pioggia", "neve", "montagna", "fiume",
@@ -30,16 +26,4 @@ public String getRandom(){
 }
 
 Timer timer = new Timer();
-
-public void startTimer(){
-    timer.scheduleAtFixedRate(new TimerTask() {
-
-        
-        @Override
-        public void run() {
-            
-        }
-        
-    }, delay, remainingTime);
-}
 }
