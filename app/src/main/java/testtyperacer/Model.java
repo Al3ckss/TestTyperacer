@@ -3,10 +3,13 @@ package testtyperacer;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.Timer;
+
+import javax.swing.JLabel;
 
 public class Model {
 
+    private final int time = 20;
+    private int points = 0;
 
     private final List<String> words = Arrays.asList(
     "auto", "casa", "sole", "luna", "mare", "vento", "pioggia", "neve", "montagna", "fiume",
@@ -21,9 +24,28 @@ public class Model {
     "andare", "venire", "stare", "vedere", "sapere", "volere", "potere", "dire", "parlare", "ascoltare"
 );
 
+public String getCurrentWord(JLabel label){
+    return label.getText();
+}
+
+public int getPoints() {
+    return points;
+}
+
+public void setNewWord(JLabel label){
+    label.setText(getRandom());
+}
+
+public void incrementPoints(){
+    this.points++;
+}
+
 public String getRandom(){
     return words.get(new Random().nextInt(words.size()));
 }
 
-Timer timer = new Timer();
+public int getTime() {
+    return time;
+}
+
 }
