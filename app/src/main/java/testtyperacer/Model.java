@@ -3,14 +3,12 @@ package testtyperacer;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
 import javax.swing.JLabel;
 
 public class Model {
 
-    private final int time = 20;
     private int points = 0;
-
+    
     private final List<String> words = Arrays.asList(
     "auto", "casa", "sole", "luna", "mare", "vento", "pioggia", "neve", "montagna", "fiume",
     "strada", "cielo", "tempo", "notte", "giorno", "amico", "amore", "cuore", "libro", "scuola",
@@ -42,10 +40,6 @@ public void incrementPoints(){
 
 public String getRandom(){
     return words.get(new Random().nextInt(words.size()));
-}
-
-public int getTime() {
-    return time;
 }
 
 }
