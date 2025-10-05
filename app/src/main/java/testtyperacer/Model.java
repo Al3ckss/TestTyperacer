@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 public class Model {
 
     private int points = 0;
+    private int time = 21;
     
     private final List<String> words = Arrays.asList(
     "auto", "casa", "sole", "luna", "mare", "vento", "pioggia", "neve", "montagna", "fiume",
@@ -21,6 +22,10 @@ public class Model {
     "oggi", "domani", "ieri", "sempre", "mai", "subito", "dopo", "prima", "spesso", "quasi",
     "andare", "venire", "stare", "vedere", "sapere", "volere", "potere", "dire", "parlare", "ascoltare"
 );
+
+public void gameOver(JLabel label){
+    label.setText("Tempo Finito. Punti: " + points);
+}
 
 public String getCurrentWord(JLabel label){
     return label.getText();
@@ -42,4 +47,11 @@ public String getRandom(){
     return words.get(new Random().nextInt(words.size()));
 }
 
+public int getTime() {
+    return time;
+}
+
+public void decreaseTime() {
+    time--;
+}
 }
