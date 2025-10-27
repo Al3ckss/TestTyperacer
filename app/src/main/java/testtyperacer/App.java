@@ -9,5 +9,7 @@ public class App {
         
         //TODO mettere interfacce
         //TODO mettere javadoc in tutti i metodi
+        //TODO raggruppare in cartelle MVC
+        //TODO fare test
     }
 }
