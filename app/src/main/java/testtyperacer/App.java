@@ -5,6 +5,9 @@ public class App {
         View view = new View();
         Model model = new Model();
         view.setLabel1(model.getRandom());
-        Controller controller = new Controller(model, view);
+        new Controller(model, view);
+        
+        //TODO mettere interfacce
+        //TODO mettere javadoc in tutti i metodi
     }
 }
