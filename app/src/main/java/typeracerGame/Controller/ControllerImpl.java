@@ -4,7 +4,7 @@ import javax.swing.Timer;
 import typeracerGame.Model.ModelImpl;
 import typeracerGame.View.ViewImpl;
 
-public class ControllerImpl {
+public class ControllerImpl implements Controller{
 
     private final ModelImpl model;
     private final ViewImpl view;

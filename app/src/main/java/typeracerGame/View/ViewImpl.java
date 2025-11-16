@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class ViewImpl {
+public class ViewImpl implements View{
 
     private final JFrame frame = new JFrame();
     public final JLabel label1 = new JLabel("Parola corrente: ");

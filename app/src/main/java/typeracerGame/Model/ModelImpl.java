@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 import javax.swing.JLabel;
 
-public class ModelImpl {
+public class ModelImpl implements Model{
 
     private int points = 0;
     private int time = 21;
