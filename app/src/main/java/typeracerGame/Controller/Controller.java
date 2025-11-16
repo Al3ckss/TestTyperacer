@@ -1,4 +1,4 @@
-package typeracerGame.Controller;
+package typeracerGame.controller;
 
 /**
  * Interfaccia del Controller del gioco TypeRacer.
@@ -7,7 +7,6 @@ package typeracerGame.Controller;
  * e controlla gli input dell'utente.
  */
 public interface Controller {
-
     /**
      * Modifica il contenuto del campo di testo con una parola casuale.
      */
