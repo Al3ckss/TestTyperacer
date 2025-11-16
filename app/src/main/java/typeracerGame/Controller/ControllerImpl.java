@@ -16,7 +16,6 @@ public class ControllerImpl implements Controller {
         this.model = model;
         this.view = view;
 
-        // Imposta parola iniziale e stato
         view.setLabel1(model.getRandom());
         model.setState(GameState.RUNNING);
 
@@ -26,12 +25,13 @@ public class ControllerImpl implements Controller {
                     model.decreaseTime();
                     view.updateTimeLabel(model.getTime());
                 } else {
+                    System.out.print("GAME OVER punti " + model.getPoints());
                     model.gameOver(view.getLabel1());
                 }
             }
         });
-
-        // Azione quando si preme Enter nel campo di testo
+        //TODO non va game over, sistemare
+        
         view.getTextField().addActionListener(e -> {
             if (model.getState() != GameState.RUNNING) return;
 
