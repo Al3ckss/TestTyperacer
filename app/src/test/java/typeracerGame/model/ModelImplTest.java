@@ -1,66 +1,61 @@
 package typeracerGame.model;
 
-import static org.junit.jupiter.api.Assertions.*;
-import javax.swing.JLabel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class ModelImplTest {
 
     private ModelImpl model;
-    private JLabel label;
 
     @BeforeEach
     void setUp() {
         model = new ModelImpl();
-        label = new JLabel();
     }
 
     @Test
-    void testInitialTimeAndPoints() {
-        assertEquals(GameConfig.INITIAL_TIME_SECONDS, model.getTime());
+    void testInitialState() {
+        assertEquals(GameState.READY, model.getState());
         assertEquals(0, model.getPoints());
-    }
-
-    @Test
-    void testRandomWordNotNull() {
-        String word = model.getRandom();
-        assertNotNull(word);
-        assertTrue(WordList.WORDS.contains(word));
-    }
-
-    @Test
-    void testIncrementPoints() {
-        int pointsBefore = model.getPoints();
-        model.incrementPoints();
-        assertEquals(pointsBefore + 1, model.getPoints());
+        assertEquals(GameConfig.INITIAL_TIME_SECONDS, model.getTime());
+        assertNull(model.getCurrentWord());
     }
 
     @Test
     void testSetNewWord() {
-        model.setNewWord(label);
-        assertNotNull(label.getText());
-        assertTrue(WordList.WORDS.contains(label.getText()));
+        model.setNewWord();
+        assertNotNull(model.getCurrentWord());
+        assertTrue(WordList.WORDS.contains(model.getCurrentWord()));
     }
 
     @Test
-    void testGameOverSetsLabel() {
-        model.gameOver(label);
-        assertEquals("Tempo Finito. Punti: " + model.getPoints(), label.getText());
-        assertEquals(GameState.GAME_OVER, model.getState());
+    void testIncrementPoints() {
+        model.incrementPoints();
+        assertEquals(1, model.getPoints());
     }
 
     @Test
     void testDecreaseTime() {
-        int timeBefore = model.getTime();
+        int initialTime = model.getTime();
         model.decreaseTime();
-        assertEquals(timeBefore - 1, model.getTime());
+        assertEquals(initialTime - 1, model.getTime());
     }
 
     @Test
-    void testGameStateTransitions() {
-        assertEquals(GameState.READY, model.getState());
+    void testGameOverState() {
+        model.decreaseTime(); // do nothing, state not zero
         model.setState(GameState.RUNNING);
-        assertEquals(GameState.RUNNING, model.getState());
+        // decrease time to 0
+        for(int i = 0; i < GameConfig.INITIAL_TIME_SECONDS; i++) {
+            model.decreaseTime();
+        }
+        assertEquals(GameState.GAME_OVER, model.getState());
+    }
+
+    @Test
+    void testGameOverMethod() {
+        model.gameOver();
+        assertEquals(GameState.GAME_OVER, model.getState());
     }
 }
