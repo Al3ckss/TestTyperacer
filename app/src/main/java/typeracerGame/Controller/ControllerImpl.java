@@ -12,25 +12,26 @@ public class ControllerImpl implements Controller {
     private final ViewImpl view;
     private final Timer timer;
 
+
     public ControllerImpl(ModelImpl model, ViewImpl view) {
         this.model = model;
         this.view = view;
-
+        timer = new Timer(GameConfig.TIMER_DELAY_MS, null);
         view.setLabel1(model.getRandom());
         model.setState(GameState.RUNNING);
 
-        timer = new Timer(GameConfig.TIMER_DELAY_MS, e -> {
+        timer.addActionListener(e -> {
+        
             if (model.getState() == GameState.RUNNING) {
-                if (model.getTime() > 0) {
-                    model.decreaseTime();
-                    view.updateTimeLabel(model.getTime());
-                } else {
-                    System.out.print("GAME OVER punti " + model.getPoints());
-                    model.gameOver(view.getLabel1());
+                model.decreaseTime();
+                view.updateTimeLabel(model.getTime());
+
+                
+                if (model.getTime() <= 0) {
+                model.gameOver(view.getLabel1());
                 }
             }
         });
-        //TODO non va game over, sistemare
         
         view.getTextField().addActionListener(e -> {
             if (model.getState() != GameState.RUNNING) return;
