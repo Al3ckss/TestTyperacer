@@ -3,18 +3,10 @@ package typeracerGame.view;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-/**
- * Interfaccia della Vista per il gioco TypeRacer.
- */
 public interface View {
-
-    void setLabel1(String label);
-
-    void setTextField(String text);
+    void setLabel1(String text);
+    void updateTimeLabel(int t);
 
     JLabel getLabel1();
-
     JTextField getTextField();
-
-    void updateTimeLabel(int newTime);
 }

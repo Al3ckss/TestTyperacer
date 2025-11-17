@@ -1,26 +1,17 @@
 package typeracerGame.model;
 
-import javax.swing.JLabel;
-
-/**
- * Interfaccia del Modello del gioco TypeRacer.
- * Definisce le operazioni principali esposte dal modello.
- */
 public interface Model {
-
-    void gameOver(JLabel label);
-
-    String getCurrentWord(JLabel label);
-
-    int getPoints();
-
-    void setNewWord(JLabel label);
+    void setNewWord();
+    String getCurrentWord();
 
     void incrementPoints();
-
-    String getRandom();
+    int getPoints();
 
     int getTime();
-
     void decreaseTime();
+
+    GameState getState();
+    void setState(GameState state);
+
+    void gameOver();
 }

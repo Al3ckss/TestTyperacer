@@ -1,6 +1,8 @@
 package typeracerGame.controller;
 
 import javax.swing.Timer;
+import javax.swing.SwingUtilities;
+
 import typeracerGame.model.ModelImpl;
 import typeracerGame.view.ViewImpl;
 import typeracerGame.model.GameConfig;
@@ -10,57 +12,46 @@ public class ControllerImpl implements Controller {
 
     private final ModelImpl model;
     private final ViewImpl view;
-    private final Timer timer;
-
+    private Timer timer;
 
     public ControllerImpl(ModelImpl model, ViewImpl view) {
         this.model = model;
         this.view = view;
-        timer = new Timer(GameConfig.TIMER_DELAY_MS, null);
-        view.setLabel1(model.getRandom());
+
         model.setState(GameState.RUNNING);
 
-        timer.addActionListener(e -> {
-        
+        timer = new Timer(GameConfig.TIMER_DELAY_MS, e ->{
             if (model.getState() == GameState.RUNNING) {
                 model.decreaseTime();
-                view.updateTimeLabel(model.getTime());
+                SwingUtilities.invokeLater(() -> view.updateTimeLabel(model.getTime()));
 
-                
                 if (model.getTime() <= 0) {
-                model.gameOver(view.getLabel1());
+                    model.gameOver();
+                    SwingUtilities.invokeLater(() -> view.setLabel1("Tempo Finito. Punti: " + model.getPoints()));
+                    timer.stop();
                 }
             }
         });
-        
+
+        setupInputField();
+        timer.start();
+    }
+
+    private void setupInputField() {
         view.getTextField().addActionListener(e -> {
             if (model.getState() != GameState.RUNNING) return;
 
             String typed = view.getTextField().getText();
-            String current = model.getCurrentWord(view.getLabel1());
+            String current = model.getCurrentWord();
 
             if (typed.equals(current)) {
                 model.incrementPoints();
-                model.setNewWord(view.getLabel1());
-                view.setTextField("");
+                model.setNewWord();
+                SwingUtilities.invokeLater(() -> {
+                    view.setLabel1(model.getCurrentWord());
+                    view.getTextField().setText("");
+                });
             }
         });
-
-        // Avvia il timer
-        timer.start();
-    }
-
-    @Override
-    public void changeText() {
-        view.setTextField(model.getRandom());
-    }
-
-    // Useful methods for timer managing
-    public void stopTimer() {
-        timer.stop();
-    }
-
-    public void startTimer() {
-        timer.start();
     }
 }

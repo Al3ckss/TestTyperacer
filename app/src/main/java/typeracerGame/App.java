@@ -6,9 +6,13 @@ import typeracerGame.view.ViewImpl;
 
 public class App {
     public static void main(String[] args) {
-        ViewImpl view = new ViewImpl();
         ModelImpl model = new ModelImpl();
-        view.setLabel1(model.getRandom());
+        ViewImpl view = new ViewImpl();
+
+        model.setNewWord();
+        view.setLabel1(model.getCurrentWord());
+        view.updateTimeLabel(model.getTime());
+
         new ControllerImpl(model, view);
     }
 }

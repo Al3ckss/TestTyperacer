@@ -6,9 +6,4 @@ package typeracerGame.controller;
  * Gestisce il collegamento tra modello e vista
  * e controlla gli input dell'utente.
  */
-public interface Controller {
-    /**
-     * Modifica il contenuto del campo di testo con una parola casuale.
-     */
-    void changeText();
-}
+public interface Controller {}
