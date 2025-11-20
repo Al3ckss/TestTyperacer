@@ -11,14 +11,13 @@ class ControllerImplTest {
 
     private ModelImpl model;
     private ViewImpl view;
-    private ControllerImpl controller;
 
     @BeforeEach
     void setUp() {
         model = new ModelImpl();
         view = new ViewImpl();
         model.setNewWord();
-        controller = new ControllerImpl(model, view);
+        new ControllerImpl(model, view);
     }
 
     @Test
